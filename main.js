@@ -39,6 +39,22 @@ function isCardID(sId) {
     }
 }
 
+/***
+<加密类型>|<版本号>|<密文数据>
+	rsa加密，加密后检测密码是否合法
+	需要引入JSEncrypt.js(https://github.com/travist/jsencrypt)
+*/
+
+export function rsaEncrypt(val,PUB_KEY){
+	var encrypt = new JSEncrypt();
+	encrypt.setPublicKey(PUB_KEY);
+	var encrypted = encrypt.encrypt(val + '');
+	if(encrypted.length!=344 || encrypted.substr(encrypted.length-2)!="==")
+		rsaEncrypt(val)
+	else
+		return '0|1.0.0|'+ encrypted 
+}
+
 
 
 
